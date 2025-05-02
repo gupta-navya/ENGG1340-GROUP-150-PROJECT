@@ -13,6 +13,13 @@ Contribution:
 4. Chan Pak Tung - Word Search Game, video
 //Game description written by Adel Kussainova 3036385731
 
+Compilation and execution instructions:
+    download all files into one folder
+    open the folder on your terminal
+    write command: make
+    write command: ./finalgame
+    have fun playing!
+    
 Game title: Doggie Day Care
 
 Game description: 
@@ -153,12 +160,6 @@ Used in Food Catcher game and Running Obstacles game
 
 
 
-Compilation and execution instructions:
-    download all files into one folder
-    open the folder on your terminal
-    write command: make
-    write command: ./finalgame
-    have fun playing!
-    
+
 
 
