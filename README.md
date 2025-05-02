@@ -84,7 +84,7 @@ Implemented features:
     3. Data Structures for Storing data: vector to store data
 
 //Written by Adel Kussainova 3036385731
-4. Running Obstacles Game
+4. Dog Surfers Game
     1. Multiple difficulty levels(Easy, Medium, Hard): pace becomes faster, more obstacles of different types each level
     2. Animation: moving objects, smooth jump animation, variable jump height, instructions animation, victory/loss animation
     3. Keyboard input: press space or J to jump, after the game to exit press any button
@@ -155,7 +155,7 @@ Implemented features:
     
 
 Non-standard libraries used:
-Used in Food Catcher game and Running Obstacles game
+Used in Food Catcher game and Dog Surfers game
 1. <ncurses.h> - used for handling graphics in the terminal(drawing borders, color, characters, movement)
 2. <unistd.h>  - used for controlling game timing and delays using sleep() and usleep(), supporting frame-rate pacing and animation timing
 
