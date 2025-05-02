@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 #include <unistd.h>
 using namespace std;
 
@@ -38,12 +39,8 @@ void printBorderedBox(const vector<string>& content) {
     string horizontal = u8"─";
     string vertical = u8"│";
 
-    string borderTop = topLeft + string(BOX_WIDTH - 2, ' ') + topRight;
-    string borderBottom = bottomLeft + string(BOX_WIDTH - 2, ' ') + bottomRight;
-
-    // Replace spaces with repeated dashes
-    borderTop = topLeft + string(BOX_WIDTH - 2, '-') + topRight;
-    borderBottom = bottomLeft + string(BOX_WIDTH - 2, '-') + bottomRight;
+    string borderTop = topLeft + string(BOX_WIDTH - 2, '-') + topRight;
+    string borderBottom = bottomLeft + string(BOX_WIDTH - 2, '-') + bottomRight;
 
     cout << "\033[36m" << borderTop << "\033[0m" << endl;
 
@@ -77,6 +74,30 @@ void printBorderedBox(const vector<string>& content) {
     cout.flush();
 }
 
+vector<string> readIntroFromFile(const string& filename) {
+    vector<string> introContent;
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        cerr << "\033[31mError: Could not open intro file: " << filename << "\033[0m\n";
+        introContent.push_back("🐶  Welcome to Doggie Day Care!  🐶");
+        introContent.push_back("");
+        introContent.push_back("You work at a dog daycare center!");
+        introContent.push_back("Play games with the pups to keep them happy and healthy.");
+        introContent.push_back("");
+        introContent.push_back("Choose a game to start:");
+        return introContent;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        introContent.push_back(line);
+    }
+
+    file.close();
+    return introContent;
+}
+
 int main() {
     // Enable UTF-8 mode on Windows
     #ifdef _WIN32
@@ -86,17 +107,12 @@ int main() {
     int choice = 0;
     bool quit = false;
 
+    // Read intro from file
+    string introFile = "doggie_daycare_intro.txt";
+    vector<string> intro = readIntroFromFile(introFile);
+
     while (!quit) {
         clearScreen();
-
-        vector<string> intro = {
-            "\033[1;33m🐶  Welcome to Doggie Day Care!  🐶\033[0m",
-            "",
-            "\033[3mYou work at a dog daycare center!",
-            "Play games with the pups to keep them happy and healthy.\033[0m",
-            "",
-            "\033[1mChoose a game to start:\033[0m"
-        };
 
         printBorderedBox(intro);
 
