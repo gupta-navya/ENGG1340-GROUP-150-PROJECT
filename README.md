@@ -23,7 +23,7 @@ exciting mini-games. Whether it’s catching falling treats, leaping over obstac
 connecting bones, each game is designed to test your speed, strategy and loyalty! With 8 mini games
 of varying difficulty levels, you can immerse yourself in a vibrant world brimming with excitement, 
 where every level brings new obstacles to overcome and treasures to sniff out. From fast-paced 
-action to brain-teasing puzzles, PawQuest offers something for every type of player. Get ready
+action to brain-teasing puzzles, Doggie Day Care offers something for every type of player. Get ready
 bark,bounce, and wag your way through an unforgettable dogventure!
 
 There are 8 unique mini games containing different levels of difficulties. 
