@@ -11,7 +11,7 @@ Contribution:
 2. Kussainova Adel - Food Catcher game, Dog Surfers game
 3. Khanna Prisha - Dog Quest Game, Simon Stays Game
 4. Chan Pak Tung - Word Search Game, video
-//Game description written by Adel Kussainova 3036385731
+
 
 Compilation and execution instructions:
     download all files into one folder
@@ -19,7 +19,9 @@ Compilation and execution instructions:
     write command: make
     write command: ./finalgame
     have fun playing!
-    
+
+//Game description written by Adel Kussainova 3036385731
+
 Game title: Doggie Day Care
 
 Game description: 
