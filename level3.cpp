@@ -52,21 +52,22 @@ struct FoodItem {
 
 vector<vector<FoodItem>> food(HEIGHT, vector<FoodItem>(WIDTH));
 
-// Level3-specific terminal functions
+// Enables raw terminal mode (no line buffering, no echoing)
+// Allows for real-time character input
 void enableRawModeLevel3() {
     termios term;
     tcgetattr(STDIN_FILENO, &term);
     term.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
-
+// Restores default terminal mode (after raw mode)
 void disableRawModeLevel3() {
     termios term;
     tcgetattr(STDIN_FILENO, &term);
     term.c_lflag |= ICANON | ECHO;
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
-
+// Non-blocking check if a key has been pressed
 bool keyPressedLevel3() {
     struct timeval tv = { 0L, 0L };
     fd_set fds;
@@ -75,16 +76,17 @@ bool keyPressedLevel3() {
     return select(STDIN_FILENO+1, &fds, NULL, NULL, &tv) > 0;
 }
 
+// Clears terminal screen and resets cursor position
 void customClearLevel3() {
     cout << "\033[2J\033[1;1H";
 }
-
+// Returns game speed (frame delay) based on difficulty
 int getGameSpeed(Difficulty level) {
     if (level == EASY) return 150000;
     if (level == MEDIUM) return 100000;
     return 60000;
 }
-
+// Resets game state variables and food grid
 void resetGame() {
     goodFoodEaten = 0;
     badFoodEaten = 0;
@@ -94,6 +96,7 @@ void resetGame() {
     food.assign(HEIGHT, vector<FoodItem>(WIDTH));
 }
 
+// Draws border using Unicode characters and ANSI color
 void drawBorder() {
     cout << COLOR_BORDER;
     cout << "╔";
@@ -111,6 +114,7 @@ void drawBorder() {
     cout << "╝" << COLOR_RESET << "\n";
 }
 
+// Displays level-specific instructions with animation
 void instructions(Difficulty level) {
     customClearLevel3();
     cout << COLOR_TEXT;
@@ -147,6 +151,7 @@ void instructions(Difficulty level) {
     customClearLevel3();
 }
 
+// Renders game screen: food, dog, counters, border
 void draw() {
     customClearLevel3();
     drawBorder();
@@ -162,16 +167,17 @@ void draw() {
             }
         }
     }
-    
+    // Draw dog character at current position
     cout << "\033[" << HEIGHT << ";" << (dogPos + 1) << "H" 
          << COLOR_DOG << (dogBounce ? "🐶" : "🐕") << COLOR_RESET;
-    
+    // Display score/status
     cout << "\033[" << (HEIGHT + 3) << ";0H" << COLOR_TEXT
          << "Good Food (🍗): " << goodFoodEaten << "\n"
          << "Bad Food (🗑️): " << badFoodEaten << COLOR_RESET;
     cout.flush();
 }
 
+// Handles food falling, generating new food, and removing unreachable items
 void updateFood(Difficulty level) {
     for (int i = HEIGHT - 2; i >= 0; i--) {
         for (int j = 0; j < WIDTH; j++) {
@@ -183,13 +189,13 @@ void updateFood(Difficulty level) {
             }
         }
     }
-
+// Remove food at bottom if dog missed it
     for (int j = 0; j < WIDTH; j++) {
         if (food[HEIGHT - 1][j].type != " " && abs(j - dogPos) > 1) {
             food[HEIGHT - 1][j] = FoodItem(" ", 0);
         }
     }
-
+// Generate new food every 5 frames
     if (frame % 5 == 0) {
         int col = rand() % WIDTH;
         int randNum = rand() % 10;
@@ -199,13 +205,13 @@ void updateFood(Difficulty level) {
         food[0][col] = FoodItem(type, 2);
     }
 }
-
+// Moves dog left or right based on key press
 void moveDog(int ch) {
     if (ch == 'a' && dogPos > BORDER_PADDING) dogPos--;
     else if (ch == 'd' && dogPos < WIDTH - BORDER_PADDING - 1) dogPos++;
     dogBounce = !dogBounce;
 }
-
+// Checks if the dog catches any food (3-cell width range)
 void checkCatch() {
     for (int dx = -1; dx <= 1; dx++) {
         int pos = dogPos + dx;
@@ -217,7 +223,7 @@ void checkCatch() {
         }
     }
 }
-
+// Displays blinking win animation
 void winAnimation() {
     string msg = "🎉 LEVEL COMPLETE! 🎉";
     for (int i = 0; i < 10; i++) {
@@ -227,7 +233,7 @@ void winAnimation() {
         usleep(200000);
     }
 }
-
+// Shows losing message and waits for any key to retry
 bool loseAnimationWithRetry(Difficulty level) {
     string msg = caughtBomb ? "💣 You caught a bomb! GAME OVER 💣" :
                              "💀 TOO MUCH JUNK FOOD! 💀";
@@ -238,7 +244,7 @@ bool loseAnimationWithRetry(Difficulty level) {
     getchar();
     return false;
 }
-
+// Handles gameplay loop for one level
 bool playLevel(Difficulty level) {
     instructions(level);
     resetGame();
@@ -269,7 +275,7 @@ bool playLevel(Difficulty level) {
     winAnimation();
     return true;
 }
-
+// Entry point for level 3 gameplay
 void startLevel3() {
     setlocale(LC_ALL, "en_US.UTF-8");
     srand(time(0));
