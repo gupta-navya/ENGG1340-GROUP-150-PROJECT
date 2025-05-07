@@ -1,4 +1,4 @@
-// Dog Jump game with obstacles and levels
+// Dog Surfers game with obstacles and levels
 // Made by: Adel Kussainova 3036385731
 
 #include <iostream>
@@ -54,21 +54,21 @@ void customClearLevel4() {
     cout << "\033[2J\033[1;1H";
 }
 
-// Cross-platform input handling
+// Enables raw terminal input mode (no buffering, no echo)
 void enableRawMode() {
     termios term;
     tcgetattr(STDIN_FILENO, &term);
     term.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
-
+// Restores terminal to normal input mode
 void disableRawMode() {
     termios term;
     tcgetattr(STDIN_FILENO, &term);
     term.c_lflag |= ICANON | ECHO;
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
-
+// Checks if a key has been pressed (non-blocking)
 bool keyPressed() {
     struct timeval tv = { 0L, 0L };
     fd_set fds;
@@ -148,7 +148,7 @@ void drawGame(int dogY, const vector<Obstacle>& obs, int groundY, int score, int
 
     drawGround(groundY + 1);
 
-    // Draw HUD
+    // Display HUD (Health, Energy, Score, Level Info)
     cout << "\033[0;0H";
     cout << "Health: " << health << " Energy: " << energy << "\n";
     cout << "Score: " << score << "/" << target << " Level: " 
@@ -190,6 +190,7 @@ bool playLevel(GameLevel level) {
     int target = 10 + 5 * level;
     int obstacleSpeed = 1 + (level == HARD ? 1 : 0);
 
+    // Initial obstacle setup
     vector<Obstacle> obstacles;
     obstacles.push_back(Obstacle(WIDTH, groundY, BUSH_EMOJI));
     if (level >= MEDIUM)
@@ -211,14 +212,14 @@ bool playLevel(GameLevel level) {
                 energy--;
             }
         }
-
+        // Update dog Y position based on jumpCounter
         if (jumpCounter > 0) {
             dogY = (jumpCounter > JUMP_HEIGHT) ? (groundY - (2 * JUMP_HEIGHT - jumpCounter + 1)) : (groundY - jumpCounter);
             jumpCounter--;
         } else {
             dogY = groundY;
         }
-
+        // Periodically generate new obstacles based on difficulty
         if (frameCount % (30 - 5 * level) == 0) {
             int type = rand() % (level == EASY ? 1 : (level == MEDIUM ? 2 : 3));
             int yPos = groundY;
@@ -234,7 +235,7 @@ bool playLevel(GameLevel level) {
             
             obstacles.push_back(Obstacle(WIDTH + rand() % 10, yPos, emoji));
         }
-
+        // Move obstacles and check for collision or score
         for (auto& o : obstacles) {
             if (!o.isActive) continue;
             
@@ -279,7 +280,7 @@ bool playLevel(GameLevel level) {
     }
 }
 
-// MAIN FUNCTION - PRESERVED EXACTLY AS YOU WROTE IT
+// Starts and runs all three difficulty levels of the game
 void startLevel4() {
     setlocale(LC_ALL, "en_US.UTF-8");
     srand(time(0));
