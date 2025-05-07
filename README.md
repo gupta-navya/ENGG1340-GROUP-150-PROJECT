@@ -35,13 +35,20 @@ where every level brings new obstacles to overcome and treasures to sniff out. F
 action to brain-teasing puzzles, Doggie Day Care offers something for every type of player. Get ready
 bark,bounce, and wag your way through an unforgettable dogventure!
 
-There are 8 unique mini games containing different levels of difficulties. 
+There are 8 unique mini games containing different levels of difficulties.
+
 Bone Memory Game - a dog-themed memory game where players uncover hidden bones 🦴 on an 8x8 grid filled with colorful decorations like 🌼, 🐝, and 🍄. Each level briefly reveals bone locations before hiding them, challenging players to remember and find them using coordinates (e.g., A1, B4). With five levels from Easy to Impossible and limited-use hints, the game tests memory, accuracy, and strategy—ending with a rewarding reveal.
+
 Tic Tac Toe Game - This is a dog-themed twist on classic Tic-Tac-Toe, where the player (🦴) faces off against a simple AI opponent (💀). Played in the terminal, the game features a friendly interface, emoji-based game pieces, and clear instructions. The first to align three bones or skulls in a row wins!
+
 Food Catcher Game - In Dog Food Catcher, you control a bouncing pup  using 'A' and 'D' keys to move left and right. Your goal is to catch 15 good foods 🍗 while avoiding junk 🗑️ and deadly bombs 💣 (on hard mode). With three difficulty levels, animated instructions, and colorful emoji-based visuals, the game tests your reflexes and focus. Be careful—3 bad catches or one bomb ends the game!
+
 Dog Surfers Game - In this side-scrolling runner, you guide a dog 🐕 across levels by jumping over bushes 🌿, dodging birds 🦅, and avoiding bombs 💣. Using the spacebar or 'J' key, you'll jump through three levels of increasing difficulty. Each level includes animated intros, energy and health tracking, and randomized obstacle spawns—offering a fast-paced and visually fun terminal experience.
+
 Dog Quest Game - Guide your dog 🐶 across a grid full of obstacles to reach its toy 🧸! Avoid static 🚧 and moving 🚗 hazards using W/A/S/D keys. Choose from Easy, Medium, or Hard mode with increasing grid sizes and obstacle difficulty. A strategic and reflex-based puzzle adventure!
+
 Simon Stays Game: Train your memory in this dog-themed Simon Says game! Watch a sequence of commands like “Sit”, “Roll”, “Stay”, and “Jump” 🐾—then repeat it using numbers. Choose from three difficulties and prove you're the ultimate dog trainer 🐕‍🦺.
+
 Word Search Game: Oops, your mischievous dog has eaten your homework again! In this playful word search game, your goal is to find a hidden dog-related word buried in a grid of random letters.  The game features three difficulty levels (Easy, Medium, Hard), each increasing the size of the grid and the complexity of the word to be found.
 
 Implemented features:
@@ -137,22 +144,6 @@ Implemented features:
     4. Interactive Text UI: console output uses colors and formatted spacing for clarity
     
 
-// written by Adel Kussainova 3036385731
-7. Dog Ate My Homework – Word Search Game
-    1. Multiple Difficulty Levels (Easy, Medium, Hard): grid size and word complexity increase
-    2. Word Search Gameplay: a single dog-themed word is hidden in the grid (horizontally or vertically)
-    3. Puzzle Generation: new randomized puzzle is generated on each play
-    4. Hint System: option to reveal the word’s location and direction
-    5. Interactive UI: grid displayed with emojis and colored highlights for answers
-    6. Input Handling: interactive menu for difficulty and actions (e.g., "Show Answer", "New Puzzle", etc.)
-    
-    How coding requirements support features:
-    1. Generation of Random Events: random selection of dog words and placement direction/position
-    2. Data Structures for Storing Data: 2D vectors for grid and boolean highlight overlay
-    3. Dynamic Memory Management: grid size dynamically adjusts with selected difficulty
-    4. Interactive Text UI: console output uses colors and formatted spacing for clarity
-    
-    
 
 Non-standard libraries used:
 Used in Food Catcher game and Dog Surfers game
